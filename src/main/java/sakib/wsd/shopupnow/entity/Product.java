@@ -2,11 +2,13 @@ package sakib.wsd.shopupnow.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -48,7 +50,7 @@ public class Product {
     @Column(name = "deleted_at", nullable = true)
     private LocalDateTime deletedAt;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
             name = "product_category_id",
             referencedColumnName = "id",
@@ -56,19 +58,9 @@ public class Product {
     )
     private ProductCategory productCategory;
 
-    @OneToOne
-    @JoinColumn(
-            name = "inventory_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "FK_product_inventory")
-    )
+    @OneToOne(mappedBy = "product", fetch = FetchType.EAGER)
     private Inventory inventory;
 
-    @OneToOne
-    @JoinColumn(
-            name = "discount_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "FK_product_discount")
-    )
+    @OneToOne(mappedBy = "product", fetch = FetchType.EAGER)
     private Discount discount;
 }
