@@ -1,6 +1,10 @@
 # Shop Up Now
 A basic E-Commerce application
 
+# System Pre-Requisite
+1. Docker
+2. Maven
+
 # Build & Run Application
 ```
 mvn clean install -DskipTests=true
